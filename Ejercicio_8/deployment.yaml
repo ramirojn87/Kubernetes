@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuberamirobot
+  labels:
+    app: kubeRamiroBot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubeRamiroBot
+  template:
+    metadata:
+      labels:
+        app: kubeRamiroBot
+    spec:			
+      containers:
+      - name: kuberamirobot
+        image: nicopaez/telegrambot:0.0.7
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: kuberamirobot-config
